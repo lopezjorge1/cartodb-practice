@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tweets about Cotto | Canelo</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    
+    <!-- Map takes up full browser window -->
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+    <script>
+    window.onload = function() {
+      var options = {
+      center: [0, 0], 
+      zoom: 2,
+      scrollwheel: true
+    };
+      var visjson = 'https://lopezjorge1695.cartodb.com/api/v2/viz/e687c2e8-923f-11e5-ab88-0e787de82d45/viz.json';
+      cartodb.createVis('map',visjson,options)
+        .done(function(vis,layers) {
+          alert("Layers has " + layers.length + " layers.");
+        })
+        .error(function(err) {
+          console.log("An error occurred: " + err);
+        });
+    }
+    </script>
+
+  </body>
+</html>

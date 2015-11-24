@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson 3 | CartoDB.js | CartoDB</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    
+    <!-- Map takes up full browser window -->
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+    
+    <!-- Drop your code between the script tags below! -->
+    <script>
+    window.onload = function() {
+
+      var layerSource = {
+        user_name: 'lopezjorge1695',
+        type: 'cartodb',
+        sublayers: [{
+          sql: "SELECT * FROM africa_adm0;",
+          cartocss: '#africa_adm0{polygon-fill:#FF6600;polygon-opacity:.5;line-color:#000;line-width:1;line-opacity:1;}'
+        }]
+      };
+
+      var sublayers = [];
+
+      var layer = new L.StamenTileLayer("watercolor");
+      var map = new L.Map("map", {
+        center: [7.19, 21.09],
+        zoom: 3
+      });
+      map.addLayer(layer);
+    
+      cartodb.createLayer(map,layerSource)
+        .addTo(map)
+        .done(function(layer) {
+          for (var i = 0; i < layer.getSubLayerCount(); i++) {
+            sublayers[i] = layer.getSubLayer(i);
+            alert("Congrats, you added sublayer #" + i + "!");
+        }
+      })
+        .error(function(err) {
+          console.log("Error: " + err);
+        });
+    }
+    </script>
+
+  </body>
+</html>

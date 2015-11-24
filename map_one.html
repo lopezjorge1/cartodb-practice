@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson 3 | CartoDB.js | CartoDB</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    
+    <!-- Map takes up full browser window -->
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+    
+    <!-- Drop your code between the script tags below! -->
+    <script>
+    window.onload = function() {
+      var map = new L.Map ('map_canvas', {center: [0,0], zoom: 2});
+
+      cartodb.createLayer(map, 'https://lopezjorge1695.cartodb.com/api/v2/viz/c2d467b8-8e00-11e5-ae22-0e3ff518bd15/viz.json')
+        .addTo(map);
+    }
+    </script>
+
+  </body>
+</html>

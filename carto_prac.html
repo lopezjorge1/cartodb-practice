@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson 1 | CartoDB.js | CartoDB</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    
+    <!-- Map takes up full browser window -->
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+    
+    <!-- Drop your code between the script tags below! -->
+    <script>
+    window.onload = function() {
+      var options = {
+      center: [40.4000, -3.6833], // Madrid
+      zoom: 7,
+      scrollwheel: true
+    };
+      var vizjson = "https://lopezjorge1695.cartodb.com/api/v2/viz/772093f4-8956-11e5-9eed-0ecfd53eb7d3/viz.json";
+      cartodb.createVis('map',vizjson,options);
+    }
+    </script>
+
+  </body>
+</html>
