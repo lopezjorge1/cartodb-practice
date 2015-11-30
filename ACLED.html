@@ -19,7 +19,8 @@
     </style>
 
     <style type='cartocss/text' id='intensity'>
-      #acled_all_africa_file_20150101_to_20151114_csv{
+    /* intensity visualization for ACLED file */
+      #acled_file{
         marker-fill: #FFCC00; 
         marker-width: 10; 
         marker-line-color: #FFFFFF; 
@@ -55,7 +56,7 @@
         user_name: 'lopezjorge1695',
         type: 'cartodb',
         sublayers: {
-          sql: 'SELECT * FROM acled_all_africa_file_20150101_to_20151114_csv WHERE (fatalaties >= 0 AND fatalaties <= 530)',
+          sql: 'SELECT * FROM acled_file WHERE (fatalaties >= 0 AND fatalaties <= 530)',
           cartocss: $('#intensity').text()
         }
       };
@@ -65,9 +66,16 @@
       });
       map.addLayer(layer);
 
+      var sublayers = [];
 
       cartodb.createLayer(map,layerSource)
         .addTo(map)
+        .done(function(layer) {
+          for(var i = 0; i < layer.getSubLayerCount(); i++) {
+            sublayers[i] = layer.getSubLayer(i);
+            alert("Congrats, you added sublayer #" + i)
+          }
+        });
     }
     </script>
 
