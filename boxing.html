@@ -5,6 +5,9 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     
     <!-- Map takes up full browser window -->
     <style>
@@ -12,6 +15,23 @@
         height: 100%;
         padding: 0;
         margin: 0;
+      }
+    </style>
+
+    <style type='cartocss/text' id='intensity'>
+      #cotto_vs_canelo {
+        marker-fill: #229A00; 
+        marker-width: 8.5; 
+        marker-line-color: #FFFFFF; 
+        marker-line-width: 0; 
+        marker-line-opacity: 1; 
+        marker-fill-opacity: 0.9; 
+        marker-comp-op: multiply; 
+        marker-type: ellipse; 
+        marker-placement: point; 
+        marker-allow-overlap: true; 
+        marker-clip: false; 
+        marker-multi-policy: largest;
       }
     </style>
 
@@ -26,12 +46,14 @@
     <script>
     window.onload = function() {
       var options = {
-      center: [0, 0], 
-      zoom: 2,
-      scrollwheel: true
-    };
-      var visjson = 'https://lopezjorge1695.cartodb.com/api/v2/viz/e687c2e8-923f-11e5-ab88-0e787de82d45/viz.json';
-      cartodb.createVis('map',visjson,options)
+        center: [40,30],
+        zoom: 2,
+        scrollwheel: true
+      };
+      
+      var vizjson = 'https://lopezjorge1695.cartodb.com/api/v2/viz/e687c2e8-923f-11e5-ab88-0e787de82d45/viz.json';
+
+      cartodb.createVis('map',vizjson)
         .done(function(vis,layers) {
           alert("Layers has " + layers.length + " layers.");
         })

@@ -5,6 +5,9 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     
     <!-- Map takes up full browser window -->
     <style>
@@ -12,6 +15,23 @@
         height: 100%;
         padding: 0;
         margin: 0;
+      }
+    </style>
+
+    <style type='cartocss/text' id='intensity'>
+      #acled_all_africa_file_20150101_to_20151114_csv{
+        marker-fill: #FFCC00; 
+        marker-width: 10; 
+        marker-line-color: #FFFFFF; 
+        marker-line-width: 2; 
+        marker-line-opacity: 1; 
+        marker-fill-opacity: 0.9; 
+        marker-comp-op: multiply; 
+        marker-type: ellipse; 
+        marker-placement: point; 
+        marker-allow-overlap: true; 
+        marker-clip: false; 
+        marker-multi-policy: largest; 
       }
     </style>
 
@@ -26,14 +46,28 @@
     
     <script>
     window.onload = function() {
-      var options = {
+      var map = new L.Map('map',{
         center: [7.19,21.09],
         zoom: 3
-      }
+      });
 
-      var vizjson = 'https://lopezjorge1695.cartodb.com/api/v2/viz/5c576ba6-915d-11e5-b7b8-0e5db1731f59/viz.json'
+      var layerSource = {
+        user_name: 'lopezjorge1695',
+        type: 'cartodb',
+        sublayers: {
+          sql: 'SELECT * FROM acled_all_africa_file_20150101_to_20151114_csv WHERE (fatalaties >= 0 AND fatalaties <= 530)',
+          cartocss: $('#intensity').text()
+        }
+      };
 
-      cartodb.createVis('map',vizjson,options)
+      var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',{
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+      });
+      map.addLayer(layer);
+
+
+      cartodb.createLayer(map,layerSource)
+        .addTo(map)
     }
     </script>
 
